@@ -61,6 +61,7 @@ pip install -r requirements.txt
 ```bash
 python main.py
 ```
+*Важно!* Бот должен быть назначен админом в группе поддержки! Иначе возникнет ошибка (https://github.com/aiogram/aiogram/issues/1569)
 *Бот готов к работе.*
 
 ## 
