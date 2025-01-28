@@ -118,39 +118,10 @@ async def ask_doc_get_contact(message: Message, state: FSMContext):
         reply_markup=kb.get_ask
     )
 
-"""
-@router.message(SupportedMediaFilter(), F.chat.type == 'private')
-async def supported_media(message: Message):
-    if message.caption and len(message.caption) > 1000:
-        return await message.reply(text='Слишком длинное описание. Описание '
-                                        'не может быть больше 1000 символов')
-    await message.copy_to(
-        chat_id=settings.GROUP_ID,
-        caption=((message.caption or "") +
-                 f"\n\n Тикет: #id{message.from_user.id}"),
-        parse_mode="HTML"
-    )
-    session_generator = get_async_session()
-    session = await session_generator.__anext__()
-    db_user = await crud_user.get_or_create_user_by_tg_message(message, session)
-    if check_user_is_banned(db_user):
-        return
-    message_data = {
-        'telegram_user_id': message.from_user.id,
-        'attachments': True,
-    }
-    if message.caption:
-        message_data['text'] = message.caption
-    await crud_message.create(message_data, session)
-
-"""
-
-
 @question_router.message(st.Specialists.contact)
 async def fail_contact(message: Message):
     await message.answer("Принимается только текст!") 
 
-# если добавить прием медиа, то в бд 
 
 @question_router.callback_query(F.data == "push")
 async def ask_doc_get_permission(callback: CallbackQuery, state: FSMContext, bot: Bot):
